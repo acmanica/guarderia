@@ -47,13 +47,13 @@
           <td><%= list.address %></td>
           <td><%= list.phone %></td>
         </tr>
-  </table>
       <% end %>
   <%else%>
      <div class="container" >
       <H3>No existén registros con esa información</H3>
      </div>
  <% end %>
+   </table>
   <div align="center">
   <%= will_paginate @list, renderer: BootstrapPagination::Rails %> 
 </div>
