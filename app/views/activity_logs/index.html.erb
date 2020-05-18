@@ -1,0 +1,52 @@
+  <row>
+  <H1 align="center">Log de Actividades</H1>
+  <row>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading">Buscador</div>
+    <div class="panel-body">
+      <div class="row">
+        <%= form_tag activity_logs_path,  method: :get, id: "list", class: 'form-inline' do %>
+          <div class="col-md-3">
+            <p>Bebés</p>
+            <%= select_tag "baby_id", options_from_collection_for_select(@babies, "id", "name", @baby_id), include_blank: "Seleccionar Bebe", class: 'form-control' %>
+          </div>
+          <div class="col-md-3">
+            <p>Asistente</p>
+            <%= select_tag "assistant_id", options_from_collection_for_select(@assistants, "id", "name", @assistant_id), include_blank: "Seleccionar Asistente", class: 'form-control' %> 
+          </div>
+          <div class="col-md-3">
+            <p>Estatus</p>
+            <%= select_tag "status", options_for_select([ ["Todos", 1], ["Terminado", 2],["En Progreso", 3]], @status), {class: "form-control"} %></div>
+          <div class="col-md-3 "><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
+        <% end %> 
+       </div> 
+      </div>
+    </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr align="center">
+        <th scope="col">Bebe</th>
+        <th scope="col">Asistente</th>
+        <th scope="col">Actividad</th>
+        <th scope="col">Inicio</th>
+        <th scope="col">Estatus</th>
+        <th scope="col">Duración</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @list.each do |list| %>
+        <tr >
+          <td><%= list.baby.name %></td>
+          <td><%= list.assistant.name %></td>
+          <td><%= list.activity.name %></td>
+          <td><%= list.start_time.strftime('%F %T') %></td>
+          <td> <%= list.stop_time ? "Terminada" : "En Progreso" %></td>
+          <td><%= list.duration ? "#{list.duration} Min" : "*" %> </td>
+        </tr>
+      <% end %>
+
+  </table>
+  <div align="center">
+  <%= will_paginate @list, renderer: BootstrapPagination::Rails %> 
+</div>

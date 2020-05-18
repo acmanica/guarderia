@@ -5,12 +5,30 @@ ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
-# Use sqlite3 as the database for Active Record
+
 gem 'devise'
 
+gem 'simple_form'
+
+gem 'validates_timeliness', '~> 5.0.0.alpha3'
+
+gem 'age_calculator'
+
+#gem 'api-pagination'
+
+#gem 'kaminari' 
+
+gem 'will_paginate-bootstrap'
+
 gem 'twitter-bootstrap-rails'
+
 gem 'devise-bootstrap-views'
+
 gem 'jquery-rails'
+
+gem 'bootstrap-sass'
+
+gem 'mysql2'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -64,6 +82,8 @@ group :test do
 end
 
 group :production do
+ #  gem 'pg', '~> 0.20'
+ # gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

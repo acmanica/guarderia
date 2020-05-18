@@ -1,0 +1,42 @@
+  <row>
+  <H1 align="center">Lista de Asistentes</H1>
+  <row>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading">Buscador</div>
+    <div class="panel-body" align="center">
+      <div class="row">
+        <%= form_tag assistants_path,  method: :get, id: "list", class: 'form-inline' do %>
+          <div class="col-md-4"><%= select_tag "name", options_from_collection_for_select(@assistants, "name", "name", @name), include_blank: "Seleccionar Asistente", class: 'form-control' %>
+          </div>
+          <% sorted = @assistants.map{|x| x.group}.uniq %>
+          <% sorted_array = sorted.sort_by { |number| -number } %>
+           <div class="col-md-4"><%= select_tag "group", options_for_select(sorted_array, @group), include_blank: "Seleccionar Grupo", class: "form-control" %></div>
+          <div class="col-md-4"><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
+        <% end %> 
+       </div> 
+      </div>
+    </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr align="center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Group</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Teléfono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @list.each do |list| %>
+        <tr >
+          <td><%= list.name %></td>
+          <td><%= list.group %></td>
+          <td><%= list.address %></td>
+          <td><%= list.phone %></td>
+        </tr>
+      <% end %>
+
+  </table>
+  <div align="center">
+  <%= will_paginate @list, renderer: BootstrapPagination::Rails %> 
+</div>

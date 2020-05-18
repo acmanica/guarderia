@@ -1,0 +1,48 @@
+  <row>
+  <H1 align="center">Lista de Bebes</H1>
+  <row>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading">Buscador</div>
+    <div class="panel-body" align="center">
+      <div class="row">
+        <%= form_tag babies_path,  method: :get, id: "list", class: 'form-inline' do %>
+          <div class="col-md-3"><%= select_tag "baby_name", options_from_collection_for_select(@babies_select, "name", "name", @baby_name), include_blank: "Seleccionar Bebe", class: 'form-control' %>
+          </div>
+          <% sorted = @babies_select.sort_by(&:mother_name).map{|x| x.mother_name}.compact %>
+           <div class="col-md-3"><%= select_tag "mother_name", options_for_select(sorted, @mother_name), include_blank: "Seleccionar Mama", class: "form-control" %></div>
+           
+           <% sorted = @babies_select.sort_by(&:father_name).select{|x| x if x.father_name.present?}.map{ |y| y.father_name} %>
+           <div class="col-md-3"><%= select_tag "father_name", options_for_select(sorted, @father_name), include_blank: "Seleccionar Papa", class: "form-control" %></div>
+          <div class="col-md-3"><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
+        <% end %> 
+       </div> 
+      </div>
+    </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr align="center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Cumpleaños</th>
+        <th scope="col">Nombre Mama</th>
+        <th scope="col">Nombre Papa</th>
+        <th scope="col">Direccion</th>
+        <th scope="col">Telefono</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @list.each do |list| %>
+        <tr >
+          <td><%= list.name %></td>
+          <td><%= list.birthday %></td>
+          <td><%= list.mother_name %></td>
+          <td><%= list.father_name %></td>
+          <td><%= list.address %></td>
+          <td><%= list.phone %></td>
+        </tr>
+      <% end %>
+
+  </table>
+  <div align="center">
+  <%= will_paginate @list, renderer: BootstrapPagination::Rails %> 
+</div>

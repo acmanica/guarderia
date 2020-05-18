@@ -10,9 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_16_031143) do
+ActiveRecord::Schema.define(version: 2020_05_16_045246) do
 
-  create_table "users", force: :cascade do |t|
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "activity_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "baby_id"
+    t.bigint "assistant_id"
+    t.bigint "activity_id"
+    t.datetime "start_time"
+    t.datetime "stop_time"
+    t.integer "duration"
+    t.text "comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_logs_on_activity_id"
+    t.index ["assistant_id"], name: "index_activity_logs_on_assistant_id"
+    t.index ["baby_id"], name: "index_activity_logs_on_baby_id"
+  end
+
+  create_table "assistants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "group"
+    t.string "address"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "babies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.date "birthday"
+    t.string "mother_name"
+    t.string "father_name"
+    t.string "address"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -28,4 +70,7 @@ ActiveRecord::Schema.define(version: 2020_05_16_031143) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activity_logs", "activities"
+  add_foreign_key "activity_logs", "assistants"
+  add_foreign_key "activity_logs", "babies"
 end

@@ -1,0 +1,35 @@
+  <row>
+  <H1 align="center">Lista Actividades</H1>
+  <row>
+  <br>
+  <div class="panel panel-default">
+    <div class="panel-heading">Buscador</div>
+    <div class="panel-body" align="center">
+      <div class="row">
+        <%= form_tag activities_path,  method: :get, id: "list", class: 'form-inline' do %>
+          <div class="col-md-6"><%= select_tag "name", options_from_collection_for_select(@activities, "id", "name", @name), include_blank: "Seleccionar Actividades", class: 'form-control' %>
+          </div>
+          <div class="col-md-6"><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
+        <% end %> 
+       </div> 
+      </div>
+    </div>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr align="center">
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @list.each do |list| %>
+        <tr >
+          <td><%= list.name %></td>
+          <td><%= list.description %></td>
+        </tr>
+      <% end %>
+
+  </table>
+  <div align="center">
+  <%= will_paginate @list, renderer: BootstrapPagination::Rails %> 
+</div>
