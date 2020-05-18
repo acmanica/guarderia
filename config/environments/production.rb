@@ -1,6 +1,6 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-config.action_mailer.default_url_options = { :host => "localhost:3001" }
+config.action_mailer.default_url_options = { :host => "https://guarderiamx.herokuapp.com/" }
   # Code is not reloaded between requests.
   config.cache_classes = true
 
