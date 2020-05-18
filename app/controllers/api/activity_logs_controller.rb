@@ -8,7 +8,7 @@ module Api
         {id: row.id, 
          baby_id: row.baby_id,
          assistant_name: row.assistant.name, 
-         start_time: row.start_time.to_s(:utc_datetime), 
+         start_time: row.start_time.to_s(:utc_datetime),
          stop_time: row.stop_time.nil? ? "not finished" : row.stop_time.to_s(:utc_datetime)
        }
       end

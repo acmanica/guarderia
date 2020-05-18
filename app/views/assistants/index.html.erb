@@ -4,19 +4,24 @@
   <br>
   <div class="panel panel-default">
     <div class="panel-heading">Buscador</div>
-    <div class="panel-body" align="center">
+    <div class="panel-body" >
       <div class="row">
         <%= form_tag assistants_path,  method: :get, id: "list", class: 'form-inline' do %>
-          <div class="col-md-4"><%= select_tag "name", options_from_collection_for_select(@assistants, "name", "name", @name), include_blank: "Seleccionar Asistente", class: 'form-control' %>
+          <div class="col-md-4">
+             <p>Asistentes</p>
+            <%= select_tag "name", options_from_collection_for_select(@assistants, "name", "name", @name), include_blank: "Seleccionar Asistente", class: 'form-control' %>
           </div>
           <% sorted = @assistants.map{|x| x.group}.uniq %>
           <% sorted_array = sorted.sort_by { |number| -number } %>
-           <div class="col-md-4"><%= select_tag "group", options_for_select(sorted_array, @group), include_blank: "Seleccionar Grupo", class: "form-control" %></div>
+           <div class="col-md-4">
+            <p>Grupo</p>
+            <%= select_tag "group", options_for_select(sorted_array, @group), include_blank: "Seleccionar Grupo", class: "form-control" %></div>
           <div class="col-md-4"><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
         <% end %> 
        </div> 
       </div>
     </div>
+<%if !@list.empty? %>
   <table class="table">
     <thead class="thead-dark">
       <tr align="center">
@@ -35,6 +40,11 @@
           <td><%= list.phone %></td>
         </tr>
       <% end %>
+ <%else%>
+   <div class="container" >
+    <H3>No existén registros con esa información</H3>
+   </div>
+<% end %>
 
   </table>
   <div align="center">
