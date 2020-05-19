@@ -4,6 +4,8 @@ Rails.application.routes.draw do
  
  get "/", to: 'users#sign_in'
 
+ get "/page", to: "page#index"
+
 get '/activity_logs', to: 'activity_logs#index'
  namespace 'api' do
    resources :activities

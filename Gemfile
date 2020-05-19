@@ -28,6 +28,7 @@ gem 'jquery-rails'
 
 gem 'bootstrap-sass'
 
+gem 'cancancan'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'

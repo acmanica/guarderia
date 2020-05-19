@@ -1,6 +1,6 @@
 class ActivityLogsController < ApplicationController
   before_action :set_params 
-  
+  load_and_authorize_resource :only => :index
   def index
 
   @babies = Baby.all.order('name ASC')
