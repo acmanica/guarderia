@@ -1,0 +1,4 @@
+es:
+  unauthorized:
+    manage:
+      all: "No estas autorizado para ver este sección"
