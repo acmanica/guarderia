@@ -2,8 +2,11 @@ module Api
   class ActivityLogsController < ApplicationController
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
+    before_action :authenticate_api
+
     def index
-      activities = ActivityLog.where(baby_id: params[:baby_id]).paginate(page: page, per_page: per_page)
+      activities = params[:id] ? ActivityLog.where(baby_id: params[:baby_id]) : ActivityLog
+      activities = activities.paginate(page: page, per_page: per_page) 
       activities = activities.map do |row| 
         {id: row.id, 
          baby_id: row.baby_id,

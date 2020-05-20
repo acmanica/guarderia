@@ -2,6 +2,7 @@ module Api
   class BabiesController < ApplicationController
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
+    before_action :authenticate_api
 
     def index
       babies = Baby.order('id').paginate(page: page, per_page: per_page);

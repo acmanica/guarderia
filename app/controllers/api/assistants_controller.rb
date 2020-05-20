@@ -2,6 +2,7 @@ module Api
   class AssistantsController < ApplicationController
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
+    before_action :authenticate_api
     
     def index
       assistants = Assistant.order('created_at DESC').paginate(page: page, per_page: per_page)

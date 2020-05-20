@@ -2,7 +2,7 @@ module Api
   class ActivitiesController < ApplicationController
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate_user!
-
+    before_action :authenticate_api
     def index
       activities = Activity.order('created_at DESC').paginate(page: page, per_page: per_page)
       data = activities.map { |row| {id: row.id, name: row.name, description: row.description} }
