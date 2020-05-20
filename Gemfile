@@ -14,6 +14,7 @@ gem 'validates_timeliness', '~> 5.0.0.alpha3'
 
 gem 'age_calculator'
 
+gem 'rails-i18n'
 #gem 'api-pagination'
 
 #gem 'kaminari' 

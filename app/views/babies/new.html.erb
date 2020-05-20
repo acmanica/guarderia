@@ -1,0 +1,12 @@
+
+<h1><%= t('.sign_up') %></h1>
+<%= render 'shared/errors', obj: @baby %>
+<div class="row">
+  <div class='col-xs-12'>
+
+    <%= render 'form' %>
+    <div class ="col-xs-4 col-xs-offset-4">
+      [ <%= link_to 'Regresar', babies_path %> ]
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
             <p>Nombre del Bebe</p>
             <%= select_tag "baby_name", options_from_collection_for_select(@babies_select, "name", "name", @baby_name), include_blank: "Seleccionar Bebe", class: 'form-control' %>
           </div>
-          <% sorted = @babies_select.sort_by(&:mother_name).map{|x| x.mother_name}.compact %>
+          <% sorted = @babies_select.sort_by(&:father_name).select{|x| x if x.mother_name.present?}.map{ |y| y.mother_name}%>
            <div class="col-md-3">
             <p>Nombre de la Mamá</p>
             <%= select_tag "mother_name", options_for_select(sorted, @mother_name), include_blank: "Seleccionar Mama", class: "form-control" %></div>
@@ -19,7 +19,7 @@
            <% sorted = @babies_select.sort_by(&:father_name).select{|x| x if x.father_name.present?}.map{ |y| y.father_name} %>
            <div class="col-md-3">
             <p>Nombre del Papá</p>
-            <%= select_tag "father_name", options_for_select(sorted, @father_name), include_blank: "Seleccionar Papa", class: "form-control" %></div>
+            <%= select_tag "father_name", options_for_select(sorted, @father_name ), include_blank: "Seleccionar Papa", class: "form-control" %></div>
           <div class="col-md-3"><%= submit_tag 'Buscar', class: "btn btn-primary" %></div>     
         <% end %> 
        </div> 
